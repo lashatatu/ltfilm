@@ -1,5 +1,16 @@
+import { useEffect, useState } from "react";
+import {
+  Box,
+  CircularProgress,
+  useMediaQuery,
+  Typography,
+} from "@mui/material";
+import { useSelector } from "react-redux";
+import { useGetMoviesQuery } from "../../services/TMDB";
+
 const Movies = () => {
-  console.log('movies');
+  const { data } = useGetMoviesQuery();
+  console.log(data);
   return (
     <div>
       <p>Movies</p>
