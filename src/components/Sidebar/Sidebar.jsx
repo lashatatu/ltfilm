@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { useTheme } from "@mui/styles";
 import useStyles from "./styles";
 
+import genreIcons from "../../assets/genres";
+
 const categories = [
   {
     label: "Popular",
@@ -25,24 +27,6 @@ const categories = [
   {
     label: "Upcoming",
     value: "upcoming",
-  },
-];
-const demoCategories = [
-  {
-    label: "Comedy",
-    value: "comedy",
-  },
-  {
-    label: "Action",
-    value: "action",
-  },
-  {
-    label: "Horror",
-    value: "horror",
-  },
-  {
-    label: "Animation",
-    value: "animation",
   },
 ];
 
@@ -68,6 +52,25 @@ const Sidebar = ({ setMobileOpen }) => {
       <Divider />
       <List>
         <ListSubheader>Categories</ListSubheader>
+        {categories.map(({ label, value }) => (
+          <Link key={value} className={classes.links} to={"/"}>
+            <ListItem onClick={() => {}} button>
+              <ListItemIcon>
+                <img
+                  src={genreIcons[label.toLowerCase()]}
+                  className={classes.genreImages}
+                  height={30}
+                  alt=""
+                />
+              </ListItemIcon>
+              <ListItemText primary={label} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        <ListSubheader>Genres</ListSubheader>
         {isFetching ? (
           <Box display={"flex"} justifyContent={"center"}>
             <CircularProgress />
@@ -76,38 +79,19 @@ const Sidebar = ({ setMobileOpen }) => {
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to={"/"}>
               <ListItem onClick={() => {}} button>
-                {/*              <ListItemIcon>
-                 <img
-                 src={redLogo}
-                 className={classes.genreImages}
-                 height={30}
-                 alt=""
-                 />
-                 </ListItemIcon>*/}
+                <ListItemIcon>
+                  <img
+                    src={genreIcons[name.toLowerCase()]}
+                    className={classes.genreImages}
+                    height={30}
+                    alt=""
+                  />
+                </ListItemIcon>
                 <ListItemText primary={name} />
               </ListItem>
             </Link>
           ))
         )}
-      </List>
-      <Divider />
-      <List>
-        <ListSubheader>Genres</ListSubheader>
-        {demoCategories.map(({ label, value }) => (
-          <Link key={value} className={classes.links} to={"/"}>
-            <ListItem onClick={() => {}} button>
-              {/*              <ListItemIcon>
-               <img
-               src={redLogo}
-               className={classes.genreImages}
-               height={30}
-               alt=""
-               />
-               </ListItemIcon>*/}
-              <ListItemText primary={label} />
-            </ListItem>
-          </Link>
-        ))}
       </List>
     </>
   );
