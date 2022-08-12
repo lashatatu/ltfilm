@@ -240,6 +240,7 @@ const MovieInformation = () => {
           <Box>sorry nothng was found</Box>
         )}
       </Box>
+      {console.log(data)}
       <Modal
         closeAfterTransition
         className={classes.modal}
