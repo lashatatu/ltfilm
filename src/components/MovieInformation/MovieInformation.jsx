@@ -32,6 +32,7 @@ import useStyles from "./styles";
 import genreIcons from "../../assets/genres";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import { MovieList } from "../index";
+import { useState } from "react";
 
 const MovieInformation = () => {
   const { id } = useParams();
@@ -41,6 +42,8 @@ const MovieInformation = () => {
       list: "/recommendations",
       movie_id: id,
     });
+
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
   const isMovieFavorited = true;
@@ -180,7 +183,11 @@ const MovieInformation = () => {
                 >
                   IMDB
                 </Button>
-                <Button onClick={() => {}} href={"#"} endIcon={<Theaters />}>
+                <Button
+                  onClick={() => setOpen(true)}
+                  href={"#"}
+                  endIcon={<Theaters />}
+                >
                   Trailer
                 </Button>
               </ButtonGroup>
@@ -233,6 +240,23 @@ const MovieInformation = () => {
           <Box>sorry nothng was found</Box>
         )}
       </Box>
+      <Modal
+        closeAfterTransition
+        className={classes.modal}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        {data?.videos?.results?.length > 0 && (
+          <iframe
+            autoPlay
+            className={classes.video}
+            frameBorder={"0"}
+            title={"Trailer"}
+            src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+            allow={"autoPlay"}
+          />
+        )}
+      </Modal>
     </Grid>
   );
 };
