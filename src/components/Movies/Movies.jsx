@@ -47,7 +47,6 @@ const Movies = () => {
   if (error) {
     return "an error has occured";
   }
-  //tt
   return (
     <div>
       <MovieList movies={data} numberOfMovies={numberOfMovies} />
