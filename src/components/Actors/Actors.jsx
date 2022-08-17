@@ -24,24 +24,26 @@ const Actors = () => {
 
   if (isFetching) {
     return (
-      <Box display={"flex"} justifyContent={"center"}>
+      <Box display={"flex"} alignItems="center" justifyContent={"center"}>
         <CircularProgress size={"8rem"} />
       </Box>
     );
   }
+
   if (error) {
     return (
-      <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+      <Box display="flex" alignItems="center" justifyContent="center">
         <Button
           startIcon={<ArrowBack />}
-          onClick={() => history.goBack()}
-          color={"primary"}
+          onClick={() => navigate(-1)}
+          color="primary"
         >
           Go Back
         </Button>
       </Box>
     );
   }
+
   return (
     <>
       <Grid container spacing={3}>
@@ -62,42 +64,39 @@ const Actors = () => {
             flexDirection: "column",
           }}
         >
-          <Typography variant={"h2"} gutterBottom>
+          <Typography variant="h2" gutterBottom>
             {data?.name}
           </Typography>
-          <Typography variant={"h5"} gutterBottom>
+          <Typography variant="h5" gutterBottom>
             Born: {new Date(data?.birthday).toDateString()}
           </Typography>
-          <Typography variant={"body1"} align={"justify"} paragraph>
-            {data?.biography || "no biography yet"}
+          <Typography variant="body1" align="justify" paragraph>
+            {data?.biography || "Sorry, no biography yet..."}
           </Typography>
-          <Box
-            marginTop={"2rem"}
-            display={"flex"}
-            justifyContent={"space-around"}
-          >
+          <Box className={classes.btns}>
             <Button
-              variant={"contained"}
-              color={"primary"}
-              target={"_blank"}
+              variant="contained"
+              color="primary"
+              target="_blank"
               href={`https://www.imdb.com/name/${data?.imdb_id}`}
             >
               IMDB
             </Button>
             <Button
               startIcon={<ArrowBack />}
-              onClick={() => history.goBack()}
-              color={"primary"}
+              onClick={() => navigate(-1)}
+              color="primary"
             >
-              BACK
+              Back
             </Button>
           </Box>
         </Grid>
       </Grid>
-      <Box margin={"2rem 0"}>
-        <Typography variant={"h2"} gutterBottom align={"center"}>
-          {movies && <MovieList movies={movies} numberOfMovies={12} />}
+      <Box margin="2rem 0">
+        <Typography variant="h2" gutterBottom align="center">
+          Movies
         </Typography>
+        {movies && <MovieList movies={movies} numberOfMovies={12} />}
         <Pagination
           currentPage={page}
           setPage={setPage}

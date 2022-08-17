@@ -12,22 +12,21 @@ export default makeStyles((theme) => ({
   },
   poster: {
     borderRadius: "20px",
-    boxShadow: "0.5em 1em 1em rgb(64,64,70)",
+    boxShadow: "0.5em 1em 1em rgb(64, 64, 70)",
     width: "80%",
     [theme.breakpoints.down("md")]: {
-      margin: "0 auto",
+      margin: "0 auto !imporatant",
       width: "50%",
-      // height: "350px",
     },
     [theme.breakpoints.down("sm")]: {
-      margin: "0 auto",
+      margin: "0 auto !imporatant",
       width: "100%",
       height: "350px",
       marginBottom: "30px",
     },
   },
   genresContainer: {
-    margin: "10px 0 !important",
+    margin: "10px 0 !imaportant",
     display: "flex",
     justifyContent: "space-around",
     flexWrap: "wrap",
@@ -52,7 +51,7 @@ export default makeStyles((theme) => ({
     objectFit: "cover",
     borderRadius: "10px",
   },
-  buttonsContainer: {
+  buttonContainer: {
     display: "flex",
     justifyContent: "space-between",
     width: "100%",
@@ -62,8 +61,8 @@ export default makeStyles((theme) => ({
   },
   modal: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
   },
   video: {
     width: "50%",

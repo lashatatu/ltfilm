@@ -1,3 +1,4 @@
+import { useState, useEffect, useContext } from "react";
 import {
   AppBar,
   IconButton,
@@ -13,29 +14,28 @@ import {
   Brightness4,
   Brightness7,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setUser, userSelector } from "../../features/auth";
 import useStyles from "./styles";
-import { useContext, useEffect, useState } from "react";
 import { Search, Sidebar } from "../index";
-import { fetchToken, createSessionId, moviesApi } from "../../utils";
+import { setUser } from "../../features/auth";
+import { fetchToken, createSessionId, moviesApi } from "../../utils/index";
 import { ColorModeContext } from "../../utils/ToggleColorMode";
 
 const NavBar = () => {
-  const { isAuthenticated, user } = useSelector(userSelector);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const colorMode = useContext(ColorModeContext);
 
   const token = localStorage.getItem("request_token");
   const sessionIdFromLocalStorage = localStorage.getItem("session_id");
-
-  const colorMode = useContext(ColorModeContext);
 
   useEffect(() => {
     const logInUser = async () => {
@@ -54,6 +54,7 @@ const NavBar = () => {
         }
       }
     };
+
     logInUser();
   }, [token]);
 
@@ -63,8 +64,8 @@ const NavBar = () => {
         <Toolbar className={classes.toolbar}>
           {isMobile && (
             <IconButton
-              color={"inherit"}
-              edge={"start"}
+              color="inherit"
+              edge="start"
               style={{ outline: "none" }}
               onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               className={classes.menuButton}
@@ -73,11 +74,11 @@ const NavBar = () => {
             </IconButton>
           )}
           <IconButton
-            color={"inherit"}
+            color="inherit"
             sx={{ ml: 1 }}
             onClick={colorMode.toggleColorMode}
           >
-            {(theme.palette.mode = "dark" ? <Brightness7 /> : <Brightness4 />)}
+            {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           {!isMobile && <Search />}
           <div>
