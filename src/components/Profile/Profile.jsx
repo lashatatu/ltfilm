@@ -7,20 +7,27 @@ import { RatedCards } from "../index";
 import { useEffect } from "react";
 
 const Profile = () => {
-  const { user } = useSelector(userSelector);
+  const {user} = useSelector(userSelector);
 
   const logout = () => {
     localStorage.clear();
     window.location.href = "/";
   };
 
-  const { data: favoriteMovies, refetch: refetchFavorites } = useGetListQuery({
+  const {
+    data: favoriteMovies,
+    refetch: refetchFavorites
+  } = useGetListQuery({
     listName: "favorite/movies",
     accountId: user.id,
     sessionId: localStorage.getItem("session_id"),
     page: 1,
   });
-  const { data: watchlistMovies, refetch: refetchWatchlisted } =
+
+  const {
+    data: watchlistMovies,
+    refetch: refetchWatchlisted
+  } =
     useGetListQuery({
       listName: "watchlist/movies",
       accountId: user.id,
@@ -43,16 +50,16 @@ const Profile = () => {
         </Button>
       </Box>
 
-      {!favoriteMovies?.results?.length && !watchlistMovies?.results?.length ? (
+      {!favoriteMovies?.results?.length && !watchlistMovies?.results?.length ?
         <Typography variant={"h5"}>
           Add favorites or watchlist some movies to see them here
         </Typography>
-      ) : (
+        :
         <Box>
           <RatedCards title={"Favorite movies"} data={favoriteMovies} />
           <RatedCards title={"Watchlist"} data={watchlistMovies} />
         </Box>
-      )}
+      }
     </Box>
   );
 };
