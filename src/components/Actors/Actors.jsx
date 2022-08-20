@@ -12,7 +12,7 @@ import { MovieList, Pagination } from "../index";
 
 const Actors = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useHistory();
   const classes = useStyles();
   const [page, setPage] = useState(1);
 
