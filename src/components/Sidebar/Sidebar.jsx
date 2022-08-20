@@ -16,6 +16,7 @@ import useStyles from "./styles";
 import { useGetGenresQuery } from "../../services/TMDB";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 import genreIcons from "../../assets/genres";
+import { useEffect } from "react";
 
 const redLogo =
   "https://fontmeme.com/permalink/220806/8dcc9a41ada3275df6cdcde8984e1dc4.png";
@@ -45,6 +46,11 @@ const Sidebar = ({ setMobileOpen }) => {
   const { genreIdOrCategoryName } = useSelector(
     (state) => state.currentGenreOrCategory
   );
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
+
   return (
     <>
       <Link to="/" className={classes.imageLink}>
